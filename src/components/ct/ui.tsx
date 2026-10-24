@@ -48,14 +48,14 @@ export function NeedsProfile({ children }: { children: ReactNode }) {
 }
 
 export function Premium({ feature, children }: { feature: string; children: ReactNode }) {
-  const { state } = useApp();
+  const { state, set } = useApp();
   if (state.premium) return <>{children}</>;
   return (
     <Glass className="mx-auto max-w-md text-center">
       <Lock className="mx-auto mb-2 text-primary" />
       <h3 className="text-xl font-semibold">{feature} is a Premium feature</h3>
       <p className="mt-1 text-sm text-muted-foreground">Unlock it with a 7-day free trial — or keep using everything free. Your tracking always stays free.</p>
-      <Button asChild className="mt-4"><Link to="/pricing">See plans</Link></Button>
+      <Button className="mt-4" onClick={() => set((s) => ({ ...s, premium: true }))}>Start 7-day free trial</Button>
     </Glass>
   );
 }
@@ -74,7 +74,7 @@ export function Disclaimer() {
   return <p className="mt-10 text-center text-xs text-muted-foreground">CycleTwin is an educational wellness tool, not a medical diagnosis. Always consult a doctor about health concerns.</p>;
 }
 
-export function Chip({ active, onClick, children }: { active?: boolean; onClick?: () => void; children: ReactNode }) {
+export function Chip({ active, onClick, children }: { active?: boolean | undefined; onClick?: () => void; children: ReactNode }) {
   return (
     <button type="button" onClick={onClick}
       className={cn("rounded-full border px-3 py-1.5 text-sm transition-all active:scale-95", active ? "border-transparent bg-primary text-primary-foreground shadow-glow" : "bg-card hover:bg-secondary")}>

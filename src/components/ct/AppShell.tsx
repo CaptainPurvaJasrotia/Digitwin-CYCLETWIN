@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { Activity, BookOpen, Brain, CalendarDays, Gift, HeartPulse, Home, LayoutDashboard, Leaf, Menu, MessageCircle, Moon, PenLine, Shield, ShieldAlert, Stethoscope, Sun, TrendingUp, Wallet, X, Droplet, Watch } from "lucide-react";
+import { Brain, CalendarDays, HeartPulse, Home, LayoutDashboard, Leaf, Menu, MessageCircle, Moon, PenLine, Sun, TrendingUp, X } from "lucide-react";
 import { useApp } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Disclaimer } from "./ui";
@@ -15,14 +15,6 @@ export const NAV = [
   { to: "/app/plans", label: "Wellness plans", icon: Leaf },
   { to: "/app/ask", label: "Ask Twin", icon: MessageCircle },
   { to: "/app/mind", label: "Mind", icon: Brain },
-  { to: "/app/risk", label: "Risk screener", icon: ShieldAlert },
-  { to: "/app/rewards", label: "Rewards", icon: Gift },
-  { to: "/app/hygiene", label: "Hygiene", icon: Droplet },
-  { to: "/app/doctor", label: "Doctor mode", icon: Stethoscope },
-  { to: "/app/learn", label: "Learn", icon: BookOpen },
-  { to: "/app/care", label: "Care & help", icon: Activity },
-  { to: "/app/data", label: "Wearables & data", icon: Watch },
-  { to: "/app/privacy", label: "Privacy", icon: Shield },
 ] as const;
 
 const MOBILE = ["/app", "/app/log", "/app/twin", "/app/insights", "/app/ask"];
@@ -42,7 +34,6 @@ export function AppShell({ children }: { children: ReactNode }) {
         </Link>
       ))}
       <div className="my-2 border-t" />
-      <Link to="/pricing" className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-muted-foreground hover:bg-secondary"><Wallet className="h-4 w-4" />Plans</Link>
       <Link to="/" className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-muted-foreground hover:bg-secondary"><Home className="h-4 w-4" />About</Link>
     </nav>
   );

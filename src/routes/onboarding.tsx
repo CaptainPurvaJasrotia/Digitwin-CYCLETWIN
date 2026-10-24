@@ -41,15 +41,15 @@ function Onboarding() {
       </div>
     </div>,
     <div key="b" className="space-y-5">
-      <div><Label>Cycle length: {p.irregular ? "irregular" : `${p.cycleLength} days`}</Label><Slider className="mt-3" min={21} max={35} value={[p.cycleLength]} onValueChange={([v]) => up("cycleLength", v)} disabled={p.irregular} /></div>
+      <div><Label>Cycle length: {p.irregular ? "irregular" : `${p.cycleLength} days`}</Label><Slider className="mt-3" min={21} max={35} value={[p.cycleLength]} onValueChange={([v]) => up("cycleLength", v ?? 0)} disabled={p.irregular} /></div>
       <Chip active={p.irregular} onClick={() => up("irregular", !p.irregular)}>My cycles are irregular</Chip>
-      <div><Label>Period length: {p.periodLength} days</Label><Slider className="mt-3" min={2} max={9} value={[p.periodLength]} onValueChange={([v]) => up("periodLength", v)} /></div>
-      <div><Label>Last period started {lastDays} days ago</Label><Slider className="mt-3" min={0} max={45} value={[lastDays]} onValueChange={([v]) => setLastDays(v)} /></div>
+      <div><Label>Period length: {p.periodLength} days</Label><Slider className="mt-3" min={2} max={9} value={[p.periodLength]} onValueChange={([v]) => up("periodLength", v ?? 0)} /></div>
+      <div><Label>Last period started {lastDays} days ago</Label><Slider className="mt-3" min={0} max={45} value={[lastDays]} onValueChange={([v]) => setLastDays(v ?? 0)} /></div>
     </div>,
     <div key="c" className="space-y-5">
       <div><Label>Activity</Label><div className="mt-2 flex gap-2">{(["low", "moderate", "high"] as const).map((a) => <Chip key={a} active={p.activity === a} onClick={() => up("activity", a)}>{a}</Chip>)}</div></div>
       <div><Label>Diet</Label><div className="mt-2 flex flex-wrap gap-2">{(["veg", "eggetarian", "non-veg", "vegan"] as const).map((a) => <Chip key={a} active={p.diet === a} onClick={() => up("diet", a)}>{a}</Chip>)}</div></div>
-      <div><Label>Usual sleep: {p.sleep}h</Label><Slider className="mt-3" min={4} max={10} step={0.5} value={[p.sleep]} onValueChange={([v]) => up("sleep", v)} /></div>
+      <div><Label>Usual sleep: {p.sleep}h</Label><Slider className="mt-3" min={4} max={10} step={0.5} value={[p.sleep]} onValueChange={([v]) => up("sleep", v ?? 0)} /></div>
     </div>,
     <div key="d" className="space-y-5">
       <div><Label>Any known conditions? (optional, private)</Label><div className="mt-2 flex flex-wrap gap-2">{CONDITIONS.map((c) => <Chip key={c} active={p.conditions.includes(c)} onClick={() => toggle("conditions", c)}>{c}</Chip>)}</div></div>

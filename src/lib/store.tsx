@@ -58,7 +58,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     loadDemo: () => {
       try {
         const d = buildDemo();
-        setState((s) => ({ ...s, ...d, demo: true, premium: true, journal: [{ date: d.periods[d.periods.length - 1], text: "Grateful for my friends who brought me chai on a crampy day." }] }));
+        setState((s) => ({ ...s, ...d, demo: true, premium: true, journal: [{ date: d.periods[d.periods.length - 1] ?? "", text: "Grateful for my friends who brought me chai on a crampy day." }] }));
       } catch (e) {
         console.error("demo failed", e);
       }

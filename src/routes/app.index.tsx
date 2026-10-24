@@ -58,7 +58,7 @@ function Dashboard() {
         <Glass>
           <div className="text-xs uppercase tracking-wider text-muted-foreground">Today's gentle challenges</div>
           <ul className="mt-2 space-y-2">{CHALLENGES.map((c) => <li key={c} className="flex items-center gap-2 text-sm"><span className="h-2 w-2 rounded-full bg-teal" />{c}</li>)}</ul>
-          <Button asChild variant="link" className="px-0"><Link to="/app/rewards">See rewards →</Link></Button>
+          
         </Glass>
       </div>
     </div>
