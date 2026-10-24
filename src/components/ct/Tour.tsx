@@ -14,7 +14,7 @@ export function Tour() {
   const [i, setI] = useState(() => (typeof window !== "undefined" && sessionStorage.getItem("ct-tour") ? -1 : 0));
   if (i < 0) return null;
   const close = () => { sessionStorage.setItem("ct-tour", "1"); setI(-1); };
-  const s = STEPS[i];
+  const s = STEPS[i]!;
   return (
     <div className="glass fixed bottom-20 right-4 z-40 w-80 p-4 lg:bottom-6">
       <button onClick={close} className="absolute right-3 top-3 text-muted-foreground" aria-label="Close tour"><X className="h-4 w-4" /></button>

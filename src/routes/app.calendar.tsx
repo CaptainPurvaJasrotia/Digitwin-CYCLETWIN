@@ -39,7 +39,7 @@ function Cal() {
     if (fertile.includes(ds)) return "fertile";
     return "";
   };
-  const style: Record<string, React.CSSProperties> = {
+  const style: Record<"period" | "predicted" | "ov" | "fertile", React.CSSProperties> = {
     period: { background: "var(--phase-menstrual)", color: "var(--primary-foreground)" },
     predicted: { border: "2px dashed var(--phase-menstrual)" },
     ov: { background: "var(--phase-ovulation)" },
@@ -60,7 +60,7 @@ function Cal() {
           {days.map((d) => {
             const ds = iso(d); const k = kind(ds); const sym = state.logs[ds]?.symptoms?.length ?? 0;
             return (
-              <div key={ds} className={`relative flex aspect-square flex-col items-center justify-center rounded-xl text-sm ${isSameMonth(d, m) ? "" : "opacity-30"} ${ds === iso(new Date()) ? "ring-2 ring-foreground" : ""}`} style={style[k]}>
+              <div key={ds} className={`relative flex aspect-square flex-col items-center justify-center rounded-xl text-sm ${isSameMonth(d, m) ? "" : "opacity-30"} ${ds === iso(new Date()) ? "ring-2 ring-foreground" : ""}`} style={k ? style[k] : undefined}>
                 {format(d, "d")}
                 {sym > 0 && <div className="absolute bottom-1 flex gap-0.5">{Array.from({ length: Math.min(sym, 3) }).map((_, i) => <span key={i} className="h-1 w-1 rounded-full bg-luteal" />)}</div>}
               </div>

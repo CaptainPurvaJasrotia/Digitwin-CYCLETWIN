@@ -42,10 +42,6 @@ function Landing() {
       <header className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5">
         <span className="flex items-center gap-2 font-display text-xl font-semibold"><span className="h-7 w-7 rounded-full bg-gradient-primary" />CycleTwin</span>
         <nav className="hidden gap-6 text-sm text-muted-foreground md:flex">
-          <Link to="/pricing" className="hover:text-foreground">Plans</Link>
-          <Link to="/business" className="hover:text-foreground">How we earn</Link>
-          <Link to="/institution" className="hover:text-foreground">Schools</Link>
-          <Link to="/admin" className="hover:text-foreground">Admin</Link>
         </nav>
         <Button asChild size="sm" variant="outline"><Link to="/app">Open app</Link></Button>
       </header>
@@ -109,7 +105,7 @@ function Landing() {
               <li>• Clearly labelled affiliate shop & sponsorships</li>
               <li>• CSR grants: sponsor a girl's Premium</li>
             </ul>
-            <Button asChild variant="link" className="px-0"><Link to="/business">See revenue calculator →</Link></Button>
+            <Button asChild variant="link" className="px-0"></Button>
           </Glass>
           <Glass>
             <h2 className="text-2xl font-semibold">Roadmap</h2>

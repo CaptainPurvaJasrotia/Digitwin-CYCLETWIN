@@ -32,14 +32,14 @@ export interface DayLog {
   caffeine?: number; // cups
   sleepHours?: number;
   sleepQuality?: number; // 1-5
-  exerciseType?: string;
+  exerciseType?: string | undefined;
   exerciseMin?: number;
   steps?: number;
   symptoms?: string[];
   weight?: number;
   temperature?: number;
   pads?: number;
-  product?: "pad" | "tampon" | "cup" | "underwear";
+  product?: "pad" | "tampon" | "cup" | "underwear" | undefined;
   notes?: string;
 }
 
@@ -59,7 +59,7 @@ export const today = () => iso(new Date());
 export function cycleStats(periods: string[], profile: Profile | null) {
   const sorted = [...periods].sort();
   const lengths: number[] = [];
-  for (let i = 1; i < sorted.length; i++) lengths.push(differenceInCalendarDays(parseISO(sorted[i]), parseISO(sorted[i - 1])));
+  for (let i = 1; i < sorted.length; i++) lengths.push(differenceInCalendarDays(parseISO(sorted[i]!), parseISO(sorted[i - 1]!)));
   const recent = lengths.slice(-6);
   const avg = recent.length >= 1 ? Math.round(recent.reduce((a, b) => a + b, 0) / recent.length) : profile?.cycleLength ?? 28;
   const sd = recent.length > 1 ? Math.sqrt(recent.reduce((a, b) => a + (b - avg) ** 2, 0) / recent.length) : 0;
@@ -181,12 +181,12 @@ export function buildDemo() {
   let start = subDays(now, 17);
   const periods: string[] = [iso(start)];
   for (let i = lens.length - 1; i >= 0; i--) {
-    start = subDays(start, lens[i]);
+    start = subDays(start, lens[i]!);
     periods.unshift(iso(start));
   }
   const logs: Record<string, DayLog> = {};
   const sorted = [...periods];
-  for (let d = differenceInCalendarDays(now, parseISO(sorted[0])); d >= 0; d--) {
+  for (let d = differenceInCalendarDays(now, parseISO(sorted[0]!)); d >= 0; d--) {
     const date = subDays(now, d);
     const ds = iso(date);
     const last = sorted.filter((p) => p <= ds).pop()!;
