@@ -4,28 +4,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
-
 @theme inline {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -51,6 +38,14 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-menstrual: var(--phase-menstrual);
+  --color-follicular: var(--phase-follicular);
+  --color-ovulation: var(--phase-ovulation);
+  --color-luteal: var(--phase-luteal);
+  --color-blush: var(--blush);
+  --color-lavender: var(--lavender);
+  --color-teal: var(--teal);
+  --color-cream: var(--cream);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -62,83 +57,120 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --radius: 1rem;
+  --cream: oklch(0.975 0.014 70);
+  --blush: oklch(0.86 0.07 10);
+  --lavender: oklch(0.84 0.07 300);
+  --teal: oklch(0.62 0.1 190);
+  --background: var(--cream);
+  --foreground: oklch(0.27 0.05 340);
+  --card: oklch(1 0 0 / 0.62);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.99 0.01 60);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.6 0.15 8);
+  --primary-foreground: oklch(0.99 0.01 60);
+  --secondary: oklch(0.93 0.035 310);
+  --secondary-foreground: oklch(0.3 0.06 320);
+  --muted: oklch(0.94 0.02 40);
+  --muted-foreground: oklch(0.5 0.04 340);
+  --accent: oklch(0.92 0.04 190);
+  --accent-foreground: oklch(0.32 0.07 200);
+  --destructive: oklch(0.58 0.2 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.88 0.03 20 / 0.7);
+  --input: oklch(0.88 0.03 20);
+  --ring: oklch(0.6 0.15 8);
+  --phase-menstrual: oklch(0.62 0.17 12);
+  --phase-follicular: oklch(0.68 0.11 178);
+  --phase-ovulation: oklch(0.78 0.14 75);
+  --phase-luteal: oklch(0.62 0.13 300);
+  --chart-1: var(--phase-menstrual);
+  --chart-2: var(--phase-follicular);
+  --chart-3: var(--phase-ovulation);
+  --chart-4: var(--phase-luteal);
+  --chart-5: oklch(0.55 0.08 250);
+  --gradient-hero: radial-gradient(60% 50% at 15% 10%, oklch(0.88 0.08 10 / 0.7), transparent 70%),
+    radial-gradient(50% 50% at 90% 20%, oklch(0.86 0.08 300 / 0.6), transparent 70%),
+    radial-gradient(50% 40% at 60% 100%, oklch(0.88 0.07 185 / 0.5), transparent 70%);
+  --gradient-primary: linear-gradient(135deg, var(--phase-menstrual), var(--phase-luteal));
+  --shadow-soft: 0 20px 50px -25px oklch(0.45 0.12 340 / 0.35);
+  --shadow-glow: 0 0 40px -5px oklch(0.65 0.16 10 / 0.5);
+  --sidebar: oklch(0.97 0.02 20);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--secondary-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --cream: oklch(0.2 0.03 320);
+  --background: oklch(0.18 0.03 320);
+  --foreground: oklch(0.95 0.02 30);
+  --card: oklch(0.26 0.04 320 / 0.6);
+  --popover: oklch(0.24 0.04 320);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.72 0.14 10);
+  --primary-foreground: oklch(0.2 0.03 320);
+  --secondary: oklch(0.32 0.06 305);
+  --secondary-foreground: oklch(0.95 0.02 30);
+  --muted: oklch(0.28 0.03 320);
+  --muted-foreground: oklch(0.75 0.03 330);
+  --accent: oklch(0.32 0.05 195);
+  --accent-foreground: oklch(0.9 0.05 185);
+  --border: oklch(1 0 0 / 0.12);
+  --input: oklch(1 0 0 / 0.15);
+  --gradient-hero: radial-gradient(60% 50% at 15% 10%, oklch(0.4 0.1 10 / 0.5), transparent 70%),
+    radial-gradient(50% 50% at 90% 20%, oklch(0.38 0.1 300 / 0.5), transparent 70%),
+    radial-gradient(50% 40% at 60% 100%, oklch(0.38 0.07 190 / 0.4), transparent 70%);
+  --sidebar: oklch(0.22 0.035 320);
 }
+
+/* colour-blind-safe palette (Okabe-Ito inspired) */
+.color-safe {
+  --phase-menstrual: oklch(0.6 0.16 45);
+  --phase-follicular: oklch(0.6 0.12 240);
+  --phase-ovulation: oklch(0.85 0.15 95);
+  --phase-luteal: oklch(0.55 0.12 330);
+}
+.large-text { font-size: 112.5%; }
 
 @layer base {
-  * {
-    border-color: var(--color-border);
-  }
-
+  * { border-color: var(--color-border); }
+  html { font-family: var(--font-sans); }
   body {
     background-color: var(--color-background);
+    background-image: var(--gradient-hero);
+    background-attachment: fixed;
     color: var(--color-foreground);
+    min-height: 100vh;
   }
+  h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.02em; }
 }
+
+@utility glass {
+  background: var(--card);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-2xl);
+}
+@utility bg-gradient-primary { background-image: var(--gradient-primary); }
+@utility shadow-glow { box-shadow: var(--shadow-glow); }
+@utility text-gradient {
+  background-image: var(--gradient-primary);
+  background-clip: text;
+  color: transparent;
+}
+@utility animate-float { animation: float 6s ease-in-out infinite; }
+@utility animate-breathe { animation: breathe 8s ease-in-out infinite; }
+@utility animate-rise { animation: rise 0.5s cubic-bezier(.2,.8,.2,1) both; }
+@utility animate-pulse-glow { animation: pulseglow 2.4s ease-in-out infinite; }
+
+@keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
+@keyframes breathe { 0%,100% { transform: scale(.7) } 50% { transform: scale(1) } }
+@keyframes rise { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: none } }
+@keyframes pulseglow { 0%,100% { opacity: .55 } 50% { opacity: 1 } }

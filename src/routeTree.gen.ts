@@ -10,33 +10,157 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAskRouteImport } from './routes/app.ask'
+import { Route as AppCalendarRouteImport } from './routes/app.calendar'
+import { Route as AppInsightsRouteImport } from './routes/app.insights'
+import { Route as AppLogRouteImport } from './routes/app.log'
+import { Route as AppMindRouteImport } from './routes/app.mind'
+import { Route as AppPlansRouteImport } from './routes/app.plans'
+import { Route as AppTwinRouteImport } from './routes/app.twin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAskRoute = AppAskRouteImport.update({
+  id: '/ask',
+  path: '/ask',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCalendarRoute = AppCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInsightsRoute = AppInsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLogRoute = AppLogRouteImport.update({
+  id: '/log',
+  path: '/log',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMindRoute = AppMindRouteImport.update({
+  id: '/mind',
+  path: '/mind',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPlansRoute = AppPlansRouteImport.update({
+  id: '/plans',
+  path: '/plans',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTwinRoute = AppTwinRouteImport.update({
+  id: '/twin',
+  path: '/twin',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/onboarding': typeof OnboardingRoute
+  '/app/ask': typeof AppAskRoute
+  '/app/calendar': typeof AppCalendarRoute
+  '/app/insights': typeof AppInsightsRoute
+  '/app/log': typeof AppLogRoute
+  '/app/mind': typeof AppMindRoute
+  '/app/plans': typeof AppPlansRoute
+  '/app/twin': typeof AppTwinRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/onboarding': typeof OnboardingRoute
+  '/app/ask': typeof AppAskRoute
+  '/app/calendar': typeof AppCalendarRoute
+  '/app/insights': typeof AppInsightsRoute
+  '/app/log': typeof AppLogRoute
+  '/app/mind': typeof AppMindRoute
+  '/app/plans': typeof AppPlansRoute
+  '/app/twin': typeof AppTwinRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/onboarding': typeof OnboardingRoute
+  '/app/ask': typeof AppAskRoute
+  '/app/calendar': typeof AppCalendarRoute
+  '/app/insights': typeof AppInsightsRoute
+  '/app/log': typeof AppLogRoute
+  '/app/mind': typeof AppMindRoute
+  '/app/plans': typeof AppPlansRoute
+  '/app/twin': typeof AppTwinRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/onboarding'
+    | '/app/ask'
+    | '/app/calendar'
+    | '/app/insights'
+    | '/app/log'
+    | '/app/mind'
+    | '/app/plans'
+    | '/app/twin'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/onboarding'
+    | '/app/ask'
+    | '/app/calendar'
+    | '/app/insights'
+    | '/app/log'
+    | '/app/mind'
+    | '/app/plans'
+    | '/app/twin'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/onboarding'
+    | '/app/ask'
+    | '/app/calendar'
+    | '/app/insights'
+    | '/app/log'
+    | '/app/mind'
+    | '/app/plans'
+    | '/app/twin'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  OnboardingRoute: typeof OnboardingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +172,107 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ask': {
+      id: '/app/ask'
+      path: '/ask'
+      fullPath: '/app/ask'
+      preLoaderRoute: typeof AppAskRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/calendar': {
+      id: '/app/calendar'
+      path: '/calendar'
+      fullPath: '/app/calendar'
+      preLoaderRoute: typeof AppCalendarRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/insights': {
+      id: '/app/insights'
+      path: '/insights'
+      fullPath: '/app/insights'
+      preLoaderRoute: typeof AppInsightsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/log': {
+      id: '/app/log'
+      path: '/log'
+      fullPath: '/app/log'
+      preLoaderRoute: typeof AppLogRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/mind': {
+      id: '/app/mind'
+      path: '/mind'
+      fullPath: '/app/mind'
+      preLoaderRoute: typeof AppMindRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/plans': {
+      id: '/app/plans'
+      path: '/plans'
+      fullPath: '/app/plans'
+      preLoaderRoute: typeof AppPlansRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/twin': {
+      id: '/app/twin'
+      path: '/twin'
+      fullPath: '/app/twin'
+      preLoaderRoute: typeof AppTwinRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAskRoute: typeof AppAskRoute
+  AppCalendarRoute: typeof AppCalendarRoute
+  AppInsightsRoute: typeof AppInsightsRoute
+  AppLogRoute: typeof AppLogRoute
+  AppMindRoute: typeof AppMindRoute
+  AppPlansRoute: typeof AppPlansRoute
+  AppTwinRoute: typeof AppTwinRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAskRoute: AppAskRoute,
+  AppCalendarRoute: AppCalendarRoute,
+  AppInsightsRoute: AppInsightsRoute,
+  AppLogRoute: AppLogRoute,
+  AppMindRoute: AppMindRoute,
+  AppPlansRoute: AppPlansRoute,
+  AppTwinRoute: AppTwinRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  OnboardingRoute: OnboardingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
